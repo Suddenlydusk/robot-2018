@@ -1,4 +1,4 @@
-//    崇宏感测 CHGC www.chgckj.com	
+//    崇宏感测 CHGC www.chgckj.com	0728
 #include <includes.h> 
 int CHGCi; 
 
@@ -507,7 +507,7 @@ void cruise_pass_bridge(void){
     t=0;
   while(t<2500){
   	  	t=mseconds();
-	if(a1>440)run(35,30);
+	if(a1>425)run(35,30);
 	 else  if(a8>375)run(30,35);	
 	   else  run(30,30);
 	}
@@ -585,13 +585,13 @@ while(a17<600){
 }
 
 void check_18(void){     
-while(a18<700){
+while(a18<650){
      cruise_50();
      }
 }
 
 void check_18_back(void){     
-  while(a18<700){
+  while(a18<610){
      cruise_back();
      }
 }
@@ -656,7 +656,6 @@ void pup1(void){                           //在平台1旋转
 void pup2(void){                      //在平台2旋转
 	pup();
 /* 	znz(122);  */
-    znz(142);
     pdown(); 
 	stop();
 }
@@ -688,7 +687,8 @@ void pup7(void){                    //在平台7旋转
 	alter_v_dt(2,0,200);
 	 p_servo();
     /*  zhuan(1550); */
-	 zhuan(495); 
+	stop();msleep(100);
+	 zhuan(490); 
  /*    znz(278);  */
 	stop();
 }
@@ -893,7 +893,7 @@ void door1_2(void){
     check_18();
     stop();msleep(100);                                              
     right_90();
-	alter_v_50(3,3,300);
+	alter_v_50(3,3,250);
 	jq(3,456);
 	loulou(30);
 	check_1();
@@ -1107,11 +1107,13 @@ void pdown(void){
 
 void p1_p2(void){
    pdown();
+   jq(3,456);
    loulou(500);
    check_1();
    run(28,31); msleep(500);    //////////冲上桥
    v=3;
    cruise_pass_bridge();
+   jq(3,456);
    loulou(900);
    check_1();                                         ////////////////监测到平台2
    pup2();
@@ -1287,7 +1289,7 @@ void pp_left_1(void){
 	run(30,5);
 	sleep(1);
 	msleep(100);
-	alter_v(2,2,1300);
+	alter_v_50(2,2,1100);
 }
 
 void pp_right_1(void){
@@ -1298,16 +1300,24 @@ void pp_right_1(void){
 
 void pp_straight(void){
 	
-	run(28,32);msleep(600);
+	/* run(28,32);msleep(600);
 	reset_system_time();
 	t=0;
-	while(t<1100){
+	while(t<900){
     t=mseconds();
 	if(a1>360) run(30,25);//aq=550;
-	else if(a8>380) run(25,30);
+	else if(a8>370) run(25,30);
 	else  run(30,30);
 	}
-	run(27,32);msleep(4);
+	run(24,32);msleep(600); */
+	reset_system_time();
+	t=0;
+	while(t<1900){
+    t=mseconds();
+	if(a8>400) run(25,30);//aq=550;
+	else if(a1>440) run(30,25);
+	else  run(30,30);
+	}
 	
 	// 到场地后 看情况
 }
@@ -1334,14 +1344,14 @@ void pp_right_90(void){
 	run(31,29);msleep(530);
 	reset_system_time();
 	t=0;
-	while(t<380){
+	while(t<400){
     t=mseconds();
 	if(a1>260) run(30,25);
 	else if(a8>450) run(25,30);
 	else  run(30,30);
 	}
 	right_90();
-	alter_v(2,3,500);
+	alter_v_50(2,3,500);
 }
 
 void pp_p7(void){
@@ -1496,7 +1506,6 @@ void pp_d4_home(void){
 	stop();msleep(100);
 	right_90();
 	jq(3,456);
-	loulou(0);
 	check_17();
 	stop();msleep(100);
 	left_90();
@@ -1655,15 +1664,13 @@ void mainX3(void)
 
 void mainX4(void)
 {   
-    pp_straight();
-	  stop();
- 
+
+	
 }
 
 void mainX5(void)
 { 
-     jq(3,456);
-	 stop();
+
 }
 
 void mainX6(void)
