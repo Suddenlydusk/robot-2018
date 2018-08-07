@@ -507,8 +507,8 @@ void cruise_pass_bridge(void){
     t=0;
   while(t<2500){
   	  	t=mseconds();
-	if(a1>430)run(35,30);
-	 else  if(a8>430)run(30,35);	
+	if(a1>440)run(35,30);
+	 else  if(a8>375)run(30,35);	
 	   else  run(30,30);
 	}
 	
@@ -541,7 +541,7 @@ void cruise_circle2(void){////////////////////////////圆循线顺时针
 }
 
 void check_1(void){//寻线+检测斜坡（前加v，不改变v）
-	while(a1<520){cruise_50();}
+	while(a1<480){cruise_50();}
 }
 
 void check_1plus(void){    //检测pp
@@ -647,15 +647,16 @@ void runp(unsigned a, unsigned b){//runp平台转
 void pup1(void){                           //在平台1旋转
 	alter_v(3,2,350);
 	alter_v(2,2,900);
-    /* zhuan(1510); */
-	 zhuan(500);
-	/* znz(248); */
+	stop();msleep(100);
+   /*  zhuan(1510);  */
+	 zhuan(495);
 	stop();
 }
 
 void pup2(void){                      //在平台2旋转
 	pup();
 /* 	znz(122);  */
+    znz(142);
     pdown(); 
 	stop();
 }
@@ -686,8 +687,8 @@ void pup7(void){                    //在平台7旋转
 	alter_v_dt(2,2,150);
 	alter_v_dt(2,0,200);
 	 p_servo();
-    /* zhuan(1550); */
-	 zhuan(500);
+    /*  zhuan(1550); */
+	 zhuan(495); 
  /*    znz(278);  */
 	stop();
 }
@@ -699,8 +700,8 @@ void pup8(void){                   //在平台8旋转
 	alter_v_dt(2,2,150);
 	alter_v_dt(2,0,200);
 	p_servo();
-   /*  zhuan(1550); */
-    zhuan(500);
+   /* zhuan(1550); */
+    zhuan(500); 
 	/* znz(148); */
 	stop();
 }
@@ -714,7 +715,7 @@ void znz(int a){                         //指南针
 		c=compass();}
  }
  
-/* void zhuan(unsigned a){
+/*  void zhuan(unsigned a){
    stop();msleep(100);
   alter_v_right(0,2,a/3);
   alter_v_right(2,4,a/6); 
@@ -722,9 +723,9 @@ void znz(int a){                         //指南针
   alter_v_right(2,0,a/3);
   stop();msleep(100);
 	
-} */
+}  */
 
-void zhuan(unsigned a){
+ void zhuan(unsigned a){
    stop();msleep(100);
   alter_v_right(0,5,a/4);
   alter_v_right(5,7,a/4); 
@@ -732,7 +733,7 @@ void zhuan(unsigned a){
   alter_v_right(5,0,a/4);
   stop();msleep(100);
 	
-}
+} 
 
 void alter_v_right(unsigned a,unsigned b,unsigned c){
 	reset_system_time( );t=0;
@@ -892,14 +893,16 @@ void door1_2(void){
     check_18();
     stop();msleep(100);                                              
     right_90();
+	alter_v_50(3,3,300);
+	jq(3,456);
 	loulou(30);
 	check_1();
 	run(20,20);
-	msleep(900);
+	msleep(500);
 	 if(digital(1)==1){ 
 	 o=1;
 	 run(20,20);
-	msleep(800);
+	msleep(1200);
 	v=3;
 	check_18();
 	left_90();
@@ -923,6 +926,7 @@ void door1_2(void){
 	reset_system_time();t=0;
 	  while(t<1100){t=mseconds();cruise_back();}
 	check_18_back();
+	stop();msleep(100);
 	left_90();
 	door4_2();
   }
@@ -940,16 +944,17 @@ void door4_2(void){
 	loulou(0);
 	check_1();
 	run(20,20);
-	msleep(900);
+	msleep(500);
 	if(digital(1)==1){ 
 	o=2;
 	run(20,20);
-	msleep(800);
+	msleep(1200);
 	v=3;
 	check_17();
+	stop();msleep(100);
 	left_90();
 	alter_v_50(1,3,100);
-	gaogao(800);
+	fast(400);
 	check_1();
 	pup5();
    p5_pp();
@@ -1087,9 +1092,10 @@ void pup(void){
 	alter_v(3,3,100);
 	alter_v_dt(0,3,200);
 	alter_v_dt(3,3,50);
-	alter_v_dt(3,0,200);
+	alter_v_dt(3,0,170);
 	p_servo();
 	zhuan(495);
+   /*  zhuan(1530); */
 }
 
 void pdown(void){
@@ -1101,9 +1107,10 @@ void pdown(void){
 
 void p1_p2(void){
    pdown();
-   loulou(300);
+   loulou(500);
    check_1();
-   run(28,32); msleep(500);    //////////冲上桥
+   run(28,31); msleep(500);    //////////冲上桥
+   v=3;
    cruise_pass_bridge();
    loulou(900);
    check_1();                                         ////////////////监测到平台2
@@ -1269,16 +1276,17 @@ void p5_pp(void){
 	check_17();
 	stop();msleep(100);
 	left_90();
-	alter_v_50(1,3,200);
+	jq(3,456);
 	loulou(500);
 	check_1plus();
-    alter_v(3,3,205);	
+    alter_v(3,3,120);	
 
 }
 
 void pp_left_1(void){
 	run(30,5);
 	sleep(1);
+	msleep(100);
 	alter_v(2,2,1300);
 }
 
@@ -1293,13 +1301,13 @@ void pp_straight(void){
 	run(28,32);msleep(600);
 	reset_system_time();
 	t=0;
-	while(t<1200){
+	while(t<1100){
     t=mseconds();
 	if(a1>360) run(30,25);//aq=550;
-	else if(a8>420) run(25,30);
+	else if(a8>380) run(25,30);
 	else  run(30,30);
 	}
-	run(32,28);msleep(300);
+	run(27,32);msleep(4);
 	
 	// 到场地后 看情况
 }
@@ -1310,7 +1318,7 @@ void pp_left_90(void){
 	run(31,29);msleep(530);
 	reset_system_time();
 	t=0;
-	while(t<350){
+	while(t<385){
     t=mseconds();
 	if(a1>360) run(30,25);
 	else if(a8>450) run(25,30);
@@ -1326,7 +1334,7 @@ void pp_right_90(void){
 	run(31,29);msleep(530);
 	reset_system_time();
 	t=0;
-	while(t<350){
+	while(t<380){
     t=mseconds();
 	if(a1>260) run(30,25);
 	else if(a8>450) run(25,30);
@@ -1356,7 +1364,7 @@ void pp_p7(void){
 void pp_p8(void){
 	v=3;
 	check_pup8();
-	jq(3,345);
+    jq(3,345);
 	v=4;
 	while(digital(1)==1){
 	cruise_1_1();}
@@ -1364,7 +1372,10 @@ void pp_p8(void){
 }
 
 void p7_pp(void){
-	 pdown();
+	alter_v(0,2,200);
+	alter_v(2,2,500);
+	alter_v(2,3,100);
+	 v=3;
      reset_system_time();t=0;
      while(t<1500){t=mseconds();cruise_1_1();}
 	 alter_v_50(3,2,200);
@@ -1479,26 +1490,35 @@ void pp_d3_home(void){
 }
 
 void pp_d4_home(void){
-	 loulou(0);
+	jq(3,456);
+    v=3;
 	check_17();
+	stop();msleep(100);
 	right_90();
+	jq(3,456);
 	loulou(0);
 	check_17();
+	stop();msleep(100);
 	left_90();
+	jq(3,456);
 	alter_v_50(3,3,800);
     v=-3;
 	check_18_back();
+	stop();msleep(100);
 	right_90();
 	loulou(0);
 	check_17();
+	stop();msleep(100);
 	left_90();
+	jq(3,456);
     gaogao(0);
-	alter_v_50(3,3,500);
-	alter_v_50(3,2,200);
+	check_1();
+	v=2;
 	reset_system_time();t=0;
-	  while(t<2300){t=mseconds();cruise_50();} 
-    v=3;	  
+	  while(t<1400){t=mseconds();cruise_50();}   
+	v=3;	  
 	check_18();
+	stop();msleep(100);
 	left_90();
 	loulou(350);
 	check_18();
@@ -1511,6 +1531,7 @@ void pp_d4_home(void){
 	check_17();
 	alter_v_50(3,3,100);
 	right(113);
+	jq(3,456);
 	check_1();
 	pup1();
 }
@@ -1569,11 +1590,11 @@ void p8_home(void){
      servo(2,375);msleep(100);   
      servo(3,750); msleep(100);       //////初始完美状态
      stop();msleep(300);
-	 servo(2,75); msleep(300);   ///////摆头
+	 servo(2,75); msleep(150);   ///////摆头
      servo(2,675); msleep(150);	
-     servo(2,75); msleep(300);
+     servo(2,75); msleep(150);
      servo(2,675); msleep(150);	
-     servo(2,375);msleep(300);    	 
+     servo(2,375);msleep(100);    	 
      
  }
  void p_servo(void){
@@ -1613,12 +1634,8 @@ void p8_home(void){
 ///////////////////////////main
 void mainX1(void)
 { 
-
-   start();
-   p1_p2();
-   p2_p4();
-   p4_p3();
-   door1();
+     round1();
+   round2();
    stop();
    
 }
@@ -1630,22 +1647,23 @@ void mainX2(void)
 
 void mainX3(void)
 { 
-p8_pp();
-	stop();
+   p7_pp();
+   pp_straight();
+   pp_p8();
+   stop();
  }
 
 void mainX4(void)
 {   
-   pdown();
+    pp_straight();
 	  stop();
  
 }
 
 void mainX5(void)
-{
-   round1();
-   round2();
-   stop();
+{ 
+     jq(3,456);
+	 stop();
 }
 
 void mainX6(void)
