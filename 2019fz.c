@@ -130,16 +130,19 @@ void pup7(void);
 void pup8(void);
 void p1_p2(void);
 void p2_p4(void);
+void p2_p4_j1(void);
 void p2_p3(void);
 void p4_p3(void);
 void p3_p4(void);
 void p4_path_p5(void);
 void p3_home(void);
 void p3_p5_1(void);
+void p3_p5_2(void);
 void p3_p5_3(void);
 void p3_p5_4(void);
 void p3_p5_check(void);
 void p5_pp(void);
+void p5_pp_24(void);
 void p8_home(void);
 void pp_p7(void);
 void pp_p8(void);
@@ -151,7 +154,10 @@ void pp_straight(void);
 void pp_left_90(void);
 void pp_right_90(void);
 void pp_d1_home(void);
+void pp_d1_home_j2(void);
+void pp_d2_home(void);
 void pp_d3_home(void);
+void pp_d3_home_j2(void);
 void pp_d4_home(void);
 void pp_path_home(void);
 	
@@ -170,8 +176,10 @@ void door1(void);
 void door2(void);
 void door3(void);
 void door4(void);
-void door1_2(void);
-void door4_2(void);
+void door1_4_2(void);
+void door4_3_2(void);
+void door1_2_2(void);
+void door2_4_2(void);
 void round1(void);
 void round2(void);
 void rec1(void);
@@ -507,8 +515,8 @@ void cruise_pass_bridge(void){
     t=0;
   while(t<2500){
   	  	t=mseconds();
-	if(a1>425)run(35,30);
-	 else  if(a8>375)run(30,35);	
+	if(a8>420)run(30,35);
+	 else  if(a1>430)run(35,30);	
 	   else  run(30,30);
 	}
 	
@@ -549,7 +557,7 @@ void check_1plus(void){    //检测pp
 }
 
 void check_1_8pp(void){    //8回pp检测pp
-	while(a1<450){cruise_50();}
+	while(a1<480){cruise_50();}
 }
 
 
@@ -650,6 +658,7 @@ void pup1(void){                           //在平台1旋转
 	stop();msleep(100);
    /*  zhuan(1510);  */
 	 zhuan(495);
+	/*  znz(56); */
 	stop();
 }
 
@@ -662,6 +671,7 @@ void pup2(void){                      //在平台2旋转
 
 void pup3(void){                  //在平台3旋转
     pup();
+	znz(260);
     pdown(); 
 	stop();
 }
@@ -675,6 +685,7 @@ void pup4(void){                       //在平台4旋转
 
 void pup5(void){                     //在平台5旋转
     pup();
+    znz(28);
     pdown();  
 	stop();
 }
@@ -690,6 +701,8 @@ void pup7(void){                    //在平台7旋转
 	stop();msleep(100);
 	 zhuan(490); 
  /*    znz(278);  */
+ 	/* znz(52); */
+	znz(60);
 	stop();
 }
 
@@ -702,15 +715,15 @@ void pup8(void){                   //在平台8旋转
 	p_servo();
    /* zhuan(1550); */
     zhuan(500); 
-	/* znz(148); */
+	/* znz(290);  */
 	stop();
 }
 
 void znz(int a){                         //指南针
 	int c=compass();
 	while(1){
-		if (c>a){motor(1,10); motor(3,-10*0.96);msleep(20);}
-		else if(c<a) {motor(1,-10);motor(3,10*0.96); msleep(20);}
+		if (c>a){motor(1,-10*0.96); motor(3,10);msleep(20);}
+		else if(c<a) {motor(1,10*0.96);motor(3,-10); msleep(20);}
 		else {break;}
 		c=compass();}
  }
@@ -888,7 +901,7 @@ void door4(void){
  }
  
   ///////////////////判门  碰撞版
-void door1_2(void){
+void door1_4_2(void){
 	quickly(450);
     check_18();
     stop();msleep(100);                                              
@@ -897,11 +910,11 @@ void door1_2(void){
 	jq(3,456);
 	loulou(30);
 	check_1();
-	run(20,20);
+	run(19,21);
 	msleep(500);
 	 if(digital(1)==1){ 
 	 o=1;
-	 run(20,20);
+	 run(20,21);
 	msleep(1200);
 	v=3;
 	check_18();
@@ -928,12 +941,12 @@ void door1_2(void){
 	check_18_back();
 	stop();msleep(100);
 	left_90();
-	door4_2();
+	door4_3_2();
   }
 
  }
 
-void door4_2(void){
+void door4_3_2(void){
 	 alter_v_50(0,3,300);
 	 fast(600);
     check_18();
@@ -1000,10 +1013,129 @@ void door4_2(void){
    pp_p8();
    p8_pp();
    pp_left_90();
-   pp_d3_home();
+   pp_d3_home_j2();
 	stop();
  }
  }
+
+ void door1_2_2(void){
+	quickly(450);
+    check_18();
+    stop();msleep(100);                                              
+    right_90();
+	alter_v_50(3,3,250);
+	jq(3,456);
+	loulou(30);
+	check_1();
+	run(20,21);
+	msleep(500);
+	 if(digital(1)==1){ 
+	 o=1;
+	 run(20,20);
+	msleep(1200);
+	v=3;
+	check_18();
+	left_90();
+	alter_v_50(1,3,100);
+    fast(1700);
+	check_1();
+	pup5();
+	p5_pp();
+   pp_left_1();
+   pp_p7();
+   p7_pp();
+   pp_straight();
+   pp_p8();
+   p8_pp();
+   pp_left_90();
+   pp_d1_home();
+	stop();
+  }
+  else if(digital(1)==0){
+	v=-3;
+	reset_system_time();t=0;
+	  while(t<1100){t=mseconds();cruise_back();}
+	check_18_back();
+	stop();msleep(100);
+	left(210);
+	door2_4_2();
+     
+  }
+
+ }
+ 
+ void door2_4_2(void){
+	alter_v_50(2,3,200);
+	jq(3,456);
+    loulou(30);
+	check_1();
+	run(20,21);
+	msleep(500);
+	 if(digital(1)==1){ 
+	 o=2;
+	 run(20,20);
+	msleep(1200);
+	quickly(440);
+	check_18();
+	alter_v_50(3,3,100);
+	left(135);
+	alter_v_50(1,3,100);
+    fast(400);
+	  check_1();
+	  pup5();
+	p5_pp();
+   pp_left_1();
+   pp_p7();
+   p7_pp();
+   pp_straight();
+   pp_p8();
+   p8_pp();
+   pp_left_90();
+   pp_d1_home();
+	stop();
+  }
+  else if(digital(1)==0){
+	  o=3;
+	v=-3;
+	reset_system_time();t=0;
+	  while(t<1100){t=mseconds();cruise_back();}
+	check_18_back();
+	stop();msleep(100);
+	left(210);
+	 alter_v_50(0,3,300);
+	 fast(600);
+    check_18();
+    alter_v(3,3,100);
+	stop();msleep(100);
+	right_90();
+	jq(3,456);
+	loulou(0);
+	alter_v_50(3,2,100);
+	check_1();
+	v=2;
+	reset_system_time();t=0;
+	  while(t<1400){t=mseconds();cruise_50();}
+	v=3;
+	check_17();
+	left_90();
+	alter_v_50(1,3,100);
+	fast(400);
+	 check_1();
+	  pup5();
+   p5_pp();
+   pp_left_1();
+   pp_p7();
+   p7_pp();
+   pp_straight();
+   pp_p8();
+   p8_pp();
+   pp_left_90();
+   pp_d4_home();
+	stop();
+  }
+	   
+  }
+
 
  void round1(void){
 	start();
@@ -1011,7 +1143,7 @@ void door4_2(void){
 	p1_p2();
     p2_p4();
     p4_p3();
-    door1_2();
+    door1_4_2();
     	
 	 
  }
@@ -1040,7 +1172,7 @@ void door4_2(void){
    pp_p8();
    p8_pp();
    pp_left_90();
-   pp_d1_home();
+   pp_d1_home_j2();
 	stop();
  }
  
@@ -1074,7 +1206,7 @@ void door4_2(void){
    pp_p8();
    p8_pp();
    pp_left_90();
-   pp_d3_home();
+   pp_d3_home_j2();
 	stop();
  }
  
@@ -1100,8 +1232,8 @@ void pup(void){
 
 void pdown(void){
 	alter_v(0,2,300);
-	alter_v(2,3,300);
-	alter_v(3,3,700);
+	alter_v(2,3,500);
+	alter_v(3,3,600);
 }
 
 
@@ -1113,8 +1245,8 @@ void p1_p2(void){
    run(28,31); msleep(500);    //////////冲上桥
    v=3;
    cruise_pass_bridge();
-   jq(3,456);
-   loulou(900);
+   jq(3,678);
+   quickly(0);
    check_1();                                         ////////////////监测到平台2
    pup2();
    stop();
@@ -1140,6 +1272,39 @@ void p2_p4(void){
 	pup4(); 
 	stop();
 }
+
+void p2_p4_j1(void){   ////////撞一个景点
+    check3_1();
+	right(135);
+	alter_v_50(2,3,200);
+	jq(3,456);
+	v=3;
+	check_1();
+	v=2;
+	  reset_system_time();t=0;
+	while(t<2200){t=mseconds();cruise_50();}
+	v=3;
+	check_17();
+	stop();msleep(100);
+	left(100);
+	alter_v_50(3,3,300);
+	fast(50);
+	check_17();
+    stop();msleep(100);
+	left(140);
+	jq(3,456);
+	quickly(150);
+	v=-3;
+	check_18_back();
+	stop();msleep(100);
+	right(128);
+	jq(3,456);
+	quickly(0);
+	check_1();
+	pup4(); 
+	stop();
+}
+
 
 void p2_p3(void){
     check3_1();
@@ -1226,6 +1391,29 @@ void p3_p5_1(void){                            ///////////////////不带检测，指定
 	
 }
 
+void p3_p5_2(void){
+	fast(400);
+    check_18();
+	stop();msleep(100);
+	right(175);
+	alter_v_50(2,3,200);
+	jq(3,456);
+    loulou(30);
+	check_1();
+	v=2;
+	reset_system_time();t=0;
+	  while(t<1400){t=mseconds();cruise_50();}
+	quickly(440);
+	check_18();
+	alter_v_50(3,3,100);
+	left(135);
+	alter_v_50(1,3,100);
+    fast(400);
+	  check_1();
+	  pup5();
+	stop();
+}
+
 void p3_p5_3(void){
 	fast(1800);
     check_18();
@@ -1239,7 +1427,7 @@ void p3_p5_3(void){
 	v=2;
 	reset_system_time();t=0;
 	  while(t<1400){t=mseconds();cruise_50();}
-	gaogao(400);
+	quickly(440);
 	check_18();
 	alter_v_50(3,3,100);
 	left(600);
@@ -1281,15 +1469,42 @@ void p5_pp(void){
 	jq(3,456);
 	loulou(500);
 	check_1plus();
-    alter_v(3,3,120);	
+    alter_v(3,3,130);	
+
+}
+
+void p5_pp_24(void){       //////////走四门撞第二个景点
+	 fast(1550);
+	check_17();
+	left_90();
+	jq(3,456);
+	check_18();
+	stop();msleep(100);
+	right_90();
+    jq(3,456);
+	alter_v_50(3,3,850);
+	v=-3;
+	check_18_back();
+	left_90();
+	jq(3,456);
+	check_17();
+	left_90();
+	jq(3,456);
+	loulou(400);
+	check_17();
+	right_90();
+	jq(3,456);
+	check_1plus();
+    alter_v(3,3,130);	
 
 }
 
 void pp_left_1(void){
 	run(30,5);
 	sleep(1);
-	msleep(100);
+	msleep(90);
 	alter_v_50(2,2,1100);
+	jq(3,789);
 }
 
 void pp_right_1(void){
@@ -1314,7 +1529,7 @@ void pp_straight(void){
 	t=0;
 	while(t<1900){
     t=mseconds();
-	if(a8>400) run(25,30);//aq=550;
+	if(a8>420) run(25,30);//aq=550;
 	else if(a1>440) run(30,25);
 	else  run(30,30);
 	}
@@ -1328,13 +1543,12 @@ void pp_left_90(void){
 	/* run(31,29);msleep(530); */
 	reset_system_time();
 	t=0;
-	while(t<989){
+	while(t<990){
     t=mseconds();
 	if(a8>400) run(25,30);//aq=550;
 	else if(a1>440) run(30,25);
 	else  run(30,30);
 	}
-	stop();msleep(900);
 	left_90();
 	alter_v_50(3,3,500);
 }
@@ -1413,17 +1627,20 @@ void p8_pp(void){
 }
 
 void pp_d1_home(void){
-	loulou(0);
+	jq(3,345);
+	v=3;
 	check_17();
 	left_90();
-	/* jq(3,456); */
+    jq(3,456);
 	loulou(400);
 	check_18();
+	stop();msleep(100);
 	right_90();
     jq(3,456);
     check_17();
 	left_90();
-	alter_v_50(3,3,1000);
+	jq(3,456);
+	alter_v_50(3,3,850);
 	v=-3;
 	check_18_back();
 	right_90();
@@ -1435,11 +1652,12 @@ void pp_d1_home(void){
 	  while(t<1300){t=mseconds();cruise_50();} 
 	alter_v_50(2,4,100);
 	check_17();
+	stop();msleep(100);
 	right_90();
-	alter_v_50(0,3,300);
+	alter_v_50(2,3,200);
 	loulou(330);
 	check_8();
-	alter_v_50(3,3,300);
+	alter_v_50(3,3,330);
 	left(110);
 	loulou(80);
    alter_v_2(3,2,100);
@@ -1448,22 +1666,80 @@ void pp_d1_home(void){
 	check_17();
 	alter_v_50(3,3,100);
 	right(150);
+	jq(3,456);
+	check_1();
+	pup1();
+}
+
+void pp_d1_home_j2(void){         ///////撞第二个景点
+	jq(3,345);
+	v=3;
+	check_17();
+	right_90();
+    jq(3,456);
+	check_17();
+	left_90();
+	jq(3,456);
+	alter_v_50(3,3,550);
+	v=-3;
+	check_18_back();
+	stop();msleep(100);
+	left_90();
+	jq(3,456);
+	quickly(0);
+	check_18();
+	stop();msleep(100);
+	right_90();
+    jq(3,456);
+    check_17();
+	left_90();
+	jq(3,456);
+	alter_v_50(3,3,850);
+	v=-3;
+	check_18_back();
+	right_90();
+	jq(3,345);               //////////////////撞完
+    loulou(400);
+	check_1();
+	v=2;
+	reset_system_time();t=0;
+	  while(t<1300){t=mseconds();cruise_50();} 
+	alter_v_50(2,4,100);
+	check_17();
+	stop();msleep(100);
+	right_90();
+	alter_v_50(2,3,200);
+	loulou(330);
+	check_8();
+	alter_v_50(3,3,330);
+	left(110);
+	loulou(80);
+   alter_v_2(3,2,100);
+   alter_v_2(2,2,2500);
+   alter_v_2(2,3,300);
+	check_17();
+	alter_v_50(3,3,100);
+	right(150);
+	jq(3,456);
 	check_1();
 	pup1();
 }
 
 void pp_d3_home(void){
-	 loulou(0);
+	jq(3,345);
+	v=3;
 	check_17();
 	left_90();
-	/* jq(3,456); */
+    jq(3,456);
 	loulou(400);
 	check_18();
+	stop();msleep(100);
 	right_90();
     jq(3,456);
     check_17();
 	left_90();
-	alter_v_50(3,3,1000);
+	jq(3,456);
+	alter_v_50(3,3,850);
 	v=-3;
 	check_18_back();
 	right_90();
@@ -1494,17 +1770,79 @@ void pp_d3_home(void){
 	check_17();
 	alter_v_50(3,3,120);
 	right(113);
+	jq(3,456);
 	check_1();
 	pup1();
 	stop();
 	
 }
 
-void pp_d4_home(void){
+void pp_d3_home_j2(void){  //////撞两个景点
+jq(3,345);
+	v=3;
+	check_17();
+	right_90();
+    jq(3,456);
+	check_17();
+	left_90();
+	jq(3,456);
+	alter_v_50(3,3,550);
+	v=-3;
+	check_18_back();
+	stop();msleep(100);
+	left_90();
+	jq(3,456);
+	quickly(0);
+	check_18();
+	stop();msleep(100);
+	right_90();
+    jq(3,456);
+    check_17();
+	left_90();
+	jq(3,456);
+	alter_v_50(3,3,850);
+	v=-3;
+	check_18_back();
+	right_90();
+	jq(3,345); 
+	check_18();
+	stop();msleep(100);
+	right(190);
+	alter_v_50(3,3,300);
+	quickly(400);
+	alter_v_50(3,2,200);
+	check_1();
+	v=2;
+	reset_system_time();t=0;
+	  while(t<1300){t=mseconds();cruise_50();}   
+	v=3;
+	check_18();
+	alter_v(3,2,180);
+	left(600);
+	stop();msleep(100);
+	alter_v_50(3,3,200);
+	loulou(330);
+	check_18();
+	alter_v_50(3,3,100);
+	 right(550);
+	loulou(80);
+   alter_v_2(3,2,100);
+   alter_v_2(2,2,2500);
+   alter_v_2(2,3,300);
+	check_17();
+	alter_v_50(3,3,120);
+	right(113);
+	jq(3,456);
+	check_1();
+	pup1();
+	stop();
+	
+}
+
+void pp_d2_home(void){
 	jq(3,456);
     v=3;
 	check_17();
-	stop();msleep(100);
 	right_90();
 	jq(3,456);
 	check_17();
@@ -1516,6 +1854,90 @@ void pp_d4_home(void){
 	check_18_back();
 	stop();msleep(100);
 	right_90();
+	jq(3,456);
+	check_17();
+	stop();msleep(100);
+	left_90();
+	loulou(0);
+	check_17();
+	stop();msleep(100);
+	left(210);
+   stop();msleep(100);
+   jq(3,456);
+	quickly(400);
+	alter_v_50(3,2,200);
+	check_1();
+	v=2;
+	reset_system_time();t=0;
+	  while(t<1300){t=mseconds();cruise_50();}   
+	v=3;
+	check_18();
+	alter_v(3,2,190);
+    right(600);
+	alter_v_50(2,3,200);
+	loulou(330);
+	check_8();
+	alter_v_50(3,3,520);
+	left(110);
+	loulou(80);
+   alter_v_2(3,2,100);
+   alter_v_2(2,2,2500);
+   alter_v_2(2,3,300);
+	check_17();
+	alter_v_50(3,3,100);
+	right(150);
+	jq(3,456);
+	check_1();
+	pup1();
+	
+/* 	left_90();
+	jq(3,456);
+	check_17();
+	left(215); */
+	/* alter_v_50(3,3,300);
+	quickly(400);
+	alter_v_50(3,2,200);
+	check_1();
+	v=2;
+	reset_system_time();t=0;
+	  while(t<1300){t=mseconds();cruise_50();}   
+	v=3;
+	check_18();
+	alter_v(3,2,190);
+	right(600);
+	alter_v_50(2,3,200);
+	loulou(330);
+	check_8();
+	alter_v_50(3,3,520);
+	left(110);
+	loulou(80);
+   alter_v_2(3,2,100);
+   alter_v_2(2,2,2500);
+   alter_v_2(2,3,300);
+	check_17();
+	alter_v_50(3,3,100);
+	right(150);
+	jq(3,456);
+	check_1();
+	pup1(); */
+}
+
+void pp_d4_home(void){
+	jq(3,456);
+    v=3;
+	check_17();
+	right_90();
+	jq(3,456);
+	check_17();
+	stop();msleep(100);
+	left_90();
+	jq(3,456);
+	alter_v_50(3,3,800);
+    v=-3;
+	check_18_back();
+	stop();msleep(100);
+	right_90();
+	jq(3,456);
 	loulou(0);
 	check_17();
 	stop();msleep(100);
@@ -1530,6 +1952,7 @@ void pp_d4_home(void){
 	check_18();
 	stop();msleep(100);
 	left_90();
+	alter_v_50(2,3,200);
 	loulou(350);
 	check_18();
 	alter_v_50(3,3,100);
@@ -1613,10 +2036,10 @@ void p8_home(void){
      servo(2,375);msleep(100);   
      servo(3,750); msleep(100);
 	 stop();msleep(300); */
-     servo(1,700); msleep(100);
-	 servo(1,400); msleep(100);
-	 servo(3,100); msleep(100); 
-	 servo(3,750); msleep(100); 
+     servo(1,700); msleep(200);
+	 servo(1,400); msleep(200);
+	 servo(3,100); msleep(200); 
+	 servo(3,750); msleep(200); 
      stop();msleep(200);
  }
  void bao_servo(void){
@@ -1657,24 +2080,20 @@ void mainX2(void)
 
 void mainX3(void)
 { 
-   p7_pp();
-   pp_straight();
-   pp_p8();
+   pp_d2_home();
    stop();
  }
 
 void mainX4(void)
-{   
-pp_left_90();
-stop();msleep(1);
-pp_d4_home();
-stop();
-	
+{  
+p2_p4_j1();
+	stop();
 }
 
 void mainX5(void)
 { 
-
+ left(140);
+  stop();
 }
 
 void mainX6(void)
